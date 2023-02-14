@@ -10,10 +10,10 @@ namespace Runner
         private float _step = 6f;
         private int _currentIndex = 0;
         private float _lastZ = 30f;
-        private int _levelsLength = 1024 * 1024;
+        
 
         [SerializeField, Range(1, 100), Tooltip("Это здоровье игрока, не перепутай")]
-        private int _health = 3;
+        private int _health = 10;
         [SerializeField]
         private Transform _player;
         [SerializeField]
@@ -55,7 +55,7 @@ namespace Runner
             _progressText.text = _progress.ToString();
 
             _lastZ += _step;
-            for(int i = 0; i < _levelsLength; i++)
+            for(int i = 0; i < _levels.Length; i++)
             {
                 var position = _levels[_currentIndex].position;
                 position.z = _lastZ;
