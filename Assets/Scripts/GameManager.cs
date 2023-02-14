@@ -13,13 +13,13 @@ namespace Runner
         private int _levelsLength = 1024 * 1024;
 
         [SerializeField, Range(1, 100), Tooltip("Это здоровье игрока, не перепутай")]
-        private int Health = 3;
+        private int _health = 3;
         [SerializeField]
         private Transform _player;
         [SerializeField]
         private Transform[] _levels;
         [SerializeField, Space]
-        private Text _text;
+        private Text _progressText;
 
 
         public static GameManager Self { get; private set; }
@@ -33,17 +33,16 @@ namespace Runner
 
 		private void Update()
 		{
-            Debug.Log("Game Manager Update");
             if (_player.position.y <= -1f) SetDamage();
         }
 
 		public void SetDamage()
         {
-            Health -= 1;
+            _health -= 1;
 
-            Debug.Log("Current health: " + Health);
+            Debug.Log("Current health: " + _health);
 
-            if(Health <= 0)
+            if(_health <= 0)
             {
                 Debug.Log("---Игрок погиб!---");
                 UnityEditor.EditorApplication.isPaused = true;
@@ -53,7 +52,7 @@ namespace Runner
         public void UpdateLevel()
         {
             _progress++;
-            _text.text = _progress.ToString();
+            _progressText.text = _progress.ToString();
 
             _lastZ += _step;
             for(int i = 0; i < _levelsLength; i++)
